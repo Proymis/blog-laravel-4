@@ -5,10 +5,11 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/js/app.js',
                 'resources/assets/admin/plugins/fontawesome-free/css/all.min.css',
                 "resources/assets/admin/css/adminlte.min.css",
                 'resources/css/app.css',
-                'resources/js/app.js',
+
             ],
             refresh: true,
         }),

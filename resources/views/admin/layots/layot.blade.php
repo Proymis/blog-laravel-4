@@ -3,16 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>AdminLTE 3 | Blank Page</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-    @vite(['resources/assets/admin/plugins/fontawesome-free/css/all.min.css',
+    @vite([
+    'resources/js/app.js',
+    'resources/assets/admin/plugins/fontawesome-free/css/all.min.css',
     "resources/assets/admin/css/adminlte.min.css",
     'resources/css/app.css',
-    'resources/js/app.js',
-    ],)
+    ])
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -203,33 +207,28 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-archive"></i>
                             <p>
-                                Dashboard
+                                Категории
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="../../index.html" class="nav-link">
+                                <a href="{{route('categories.index')}}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v1</p>
+                                    <p>Список категорий</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index2.html" class="nav-link">
+                                <a href="{{route('categories.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v2</p>
+                                    <p>Новая категория</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="../../index3.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v3</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -241,8 +240,35 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-@yield('content')
-    <!-- /.content-wrapper -->
+    <div class="content-wrapper">
+
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12">
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{session('success')}}
+                            </div>
+                        @endif
+
+                </div>
+            </div>
+        </div>
+
+        @yield('content')
+    </div>
+<!-- /.content-wrapper -->
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
@@ -258,8 +284,16 @@
     <!-- /.control-sidebar -->
 </div>
 
-
+{{--<script>--}}
+{{--    $('nav-sidebar a').each(function(){--}}
+{{--        let location = window.location.protocol + '//' + window.location.host + window.location.pathname;--}}
+{{--        let link = this.href;--}}
+{{--        if(link == location){--}}
+{{--            $(this).addClass('active');--}}
+{{--            $(this).closest('.has-treeview').addClass('menu-open');--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
 
 </body>
 </html>
-

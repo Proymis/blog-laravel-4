@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/',[\App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin.index');
 });
+
+Route::resource('admin/categories', \App\Http\Controllers\Admin\CategoryController::class);
+
